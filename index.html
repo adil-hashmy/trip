@@ -182,6 +182,35 @@
   .refund b{ color: var(--amber); }
 
   footer{ margin-top: 30px; font-size: 11.5px; color: var(--mist-dim); line-height:1.6; }
+
+  .table-scroll{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  @media (max-width: 640px){
+    body{ padding: 18px 12px 48px; }
+    .masthead h1{ font-size: 24px; }
+    .masthead .tag{ text-align: left; font-size: 12px; }
+    .panel{ padding: 16px; }
+    .add-row{ flex-wrap: wrap; }
+    .add-row input[type=text]{ flex: 1 1 100%; }
+    .add-row select, .add-row button{ flex: 1 1 auto; }
+    table{ min-width: 420px; }
+    .pay-card .amt{ font-size: 24px; }
+  }
+
+  @media (max-width: 480px){
+    .person-row{
+      grid-template-columns: 20px 1fr auto;
+      grid-template-areas:
+        "chk name del"
+        "role role status";
+      row-gap: 6px;
+    }
+    .person-row input[type=checkbox]{ grid-area: chk; }
+    .person-row input[type=text]{ grid-area: name; }
+    .person-row select{ grid-area: role; justify-self: start; }
+    .person-row .status{ grid-area: status; justify-self: end; }
+    .person-row .del{ grid-area: del; justify-self: end; }
+  }
 </style>
 </head>
 <body>
@@ -312,10 +341,12 @@
 
   <div class="panel">
     <div class="section-title">Who owes what</div>
-    <table>
-      <thead><tr><th>Name</th><th>Status</th><th class="num">Pays</th></tr></thead>
-      <tbody id="peopleBody"></tbody>
-    </table>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Name</th><th>Status</th><th class="num">Pays</th></tr></thead>
+        <tbody id="peopleBody"></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="refund" id="refundBox"></div>
